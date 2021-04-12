@@ -1,0 +1,32 @@
+version: "3"
+services:
+    client:
+        build:
+            context: ./client
+        ports:
+            - "${CLIENT_PORT}:${CLIENT_PORT}"
+        container_name: max_web
+        stdin_open: true
+        volumes:
+            - ./client:/usr/src/app
+            - /usr/src/app/node_modules
+        depends_on:
+            - server
+    server:
+        build:
+            context: ./server
+        ports:
+            - "${SERVER_PORT}:${SERVER_PORT}"
+        container_name: max_server
+        volumes:
+            - ./server:/usr/src/app/server
+    storybook:
+        container_name: max_stories
+        build:
+            context: ./client
+        command: npm run storybook
+        ports:
+            - "${STORIES_PORT}:${STORIES_PORT}"
+        volumes:
+            - ./client:/usr/src/app
+            - /usr/src/app/node_modules

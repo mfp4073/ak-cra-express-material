@@ -1,21 +1,21 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "avr express API",
-  "main": "app.js",
+  "description": "",
+  "main": "index.js",
   "dependencies": {
-    "body-parser": "^1.19.0",
+     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "faker": "^5.1.0",
-    "firebase": "^7.18.0",
-    "pg": "^8.4.2"
+    "body-parser": "^1.19.0",
+    "connect-mongodb-session": "^2.4.1",
+    "dotenv": "^8.2.0",
+    "express-session": "^1.17.1"
+
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./index.js"
   },
-  "proxy": "http://avr_server:8080",
   "author": "",
   "license": "ISC"
 }

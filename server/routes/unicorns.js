@@ -11,7 +11,7 @@ module.exports = (appRouter) => {
   // fetch the current unicorns
   unicornsRouter
     .route('/')
-    .get(UnicornsController.fetchUnicorn)
+    .get(UnicornsController.fetchUnicorns)
     .post(UnicornsController.createUnicorn);
 
   // attach the api router to the appRouter

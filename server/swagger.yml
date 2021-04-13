@@ -1,0 +1,125 @@
+swagger: "2.0"
+info:
+  title: Sample API
+  description: API description in Markdown.
+  version: 0.0.11-alpha.0
+
+host: localhost:3300
+basePath: /api
+schemes:
+  - http
+
+consumes:
+  - application/json
+provides:
+  - application/json    
+
+paths:
+  /health:
+    get:
+      summary: a health check to make sure we have healthy nadrukkers
+      tags:
+        - health
+      produces:
+        - application/json
+      responses:
+        200:
+          description: We are healthy nadrukkers
+  /unicorns:
+    get:
+      summary: retrieve a list of unicorns
+      description: an awesome description about unicorns should probably go here
+      operationId: fetchUnicorns
+      tags:
+        - unicorns
+      parameters:
+        - $ref: '#/parameters/offsetParam'
+        - $ref: '#/parameters/limitParam'  
+      produces:
+        - application/json  
+      responses:
+        200:
+          description: OK  
+          examples: 
+            application/json: { data: { unicorns: []}, meta: { message: "successfully fetched a list of unicorns"} }  
+        400:
+          $ref: '#/definitions/ErrorResponse'  
+
+    post:
+      summary: create a new unicorn
+      description: an awesome description about unicorns should probably go here
+      operationId: createUnicorn
+      tags:
+        - unicorns
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: fluffy
+          description: I am a fluffy unicorn.
+          schema:
+            $ref: '#/definitions/Unicorns'
+      responses:
+         200:
+           description: OK    
+           schema:
+            $ref: '#/definitions/Response'   
+         400:
+            $ref: '#/definitions/ErrorResponse'   
+ 
+
+parameters:
+  offsetParam: 
+    in: query
+    name: offset
+    required: false
+    type: integer
+    minimum: 0
+    description: The number of items to skip before starting to collect the result set.
+  limitParam:
+    in: query
+    name: limit
+    required: false
+    type: integer
+    minimum: 1
+    maximum: 50
+    default: 20
+    description: The numbers of items to return.
+
+definitions:
+  Unicorns:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      description:
+        type: string      
+    required:
+      - id
+      - name
+        
+  Response:
+    type: object
+    properties:
+      data: 
+        type: object
+      meta: 
+        type: object
+    required:
+      - data
+      - meta
+  ErrorResponse:
+    type: object
+    properties:
+      data: 
+        type: object
+      meta: 
+        type: object
+      errors: 
+        type: object
+    required:
+      - data
+      - meta
+      - errors            

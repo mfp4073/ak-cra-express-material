@@ -46,7 +46,7 @@ const routes = [
     children: [
       { path: 'login', element: <Login /> },
       { path: '404', element: <NotFound /> },
-      { path: '/', element: <Navigate to="dashboard" /> },
+      { path: '/', element: <Navigate to="dashboard" /> }, // change this to login if you wnat the / to redirect to login
       { path: '*', element: <Navigate to="/404" /> }
     ]
   }

@@ -18,6 +18,9 @@ class AuthProvider extends React.Component {
     this.setState({ isAuth: true })
     // setTimeout(() => this.setState({ isAuth: true }), 1000)
     console.log("clicked2", this.state)
+    // you set the state but you dont redirect it anywhere
+    // push(/dashboard) or wherever you intend for it to go
+    // youll have to look up the correct way frome react-router-dom
   }
 
   logout() {
